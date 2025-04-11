@@ -2,26 +2,26 @@
 import { useState } from "react";
 import { PaperPlaneRight } from "@phosphor-icons/react";
 
-interface Message {
-  id: number;
-  sender: "user" | "bot";
-  text: string;
-  timestamp: string; // Added for WhatsApp-like timestamps
-}
+// interface Message {
+//   id: number;
+//   sender: "user" | "bot";
+//   text: string;
+//   timestamp: string; // Added for WhatsApp-like timestamps
+// }
 
 export const personas = {
   Hitesh: {
-    name: "Hitesh Choudhary",
+    name: "Hitesh Sir",
   },
   Piyush: {
-    name: "Piyush Garg",
+    name: "Piyush Bhaiya",
   },
 };
 
 export default function Chat() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [persona, setPersona] = useState<keyof typeof personas>("Hitesh");
+  const [persona, setPersona] = useState("Hitesh");
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
@@ -31,7 +31,7 @@ export default function Chat() {
       hour: "2-digit",
       minute: "2-digit",
     });
-    const newMessage: Message = {
+    const newMessage = {
       id: Date.now(),
       sender: "user",
       text: input.trim(),
@@ -97,7 +97,7 @@ export default function Chat() {
   };
 
   return (
-    <div className="flex flex-col h-10/12 bg-gray-50">
+    <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
       <div className="fixed top-0 left-0 right-0 bg-teal-600 text-white p-4 flex items-center justify-between shadow-md z-10">
         <div className="flex items-center gap-3">
@@ -116,12 +116,12 @@ export default function Chat() {
           value={persona}
           onChange={(e) => {
             console.log("SELECTED PERSONA", e.target.value);
-            setPersona(e.target.value as keyof typeof personas);
+            setPersona(e.target.value);
           }}
           className="bg-teal-700 text-white text-sm p-2 rounded-lg focus:outline-none">
           {Object.keys(personas).map((key) => (
             <option key={key} value={key}>
-              {personas[key as keyof typeof personas].name}
+              {personas[key].name}
             </option>
           ))}
         </select>
